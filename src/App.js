@@ -27,6 +27,8 @@ function App() {
                   title={pizza.title}
                   price={pizza.price}
                   img={pizza.imageUrl}
+                  sizes={pizza.sizes}
+                  types={pizza.types}
                 />
               ))}
             </div>
