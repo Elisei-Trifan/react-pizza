@@ -2,8 +2,13 @@ import React from 'react'
 
 const Sort = () => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const [selected, setSelected] = React.useState('')
+  const [selected, setSelected] = React.useState(0)
   const popup = ['популярности', 'цене', 'алфавиту']
+
+  function handleSelected(i) {
+    setSelected(i)
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div className="sort">
@@ -21,13 +26,19 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsOpen(!isOpen)}>популярности</span>
+        <span onClick={() => setIsOpen(!isOpen)}>{popup[selected]}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
           <ul>
-            {popup.map((cond) => (
-              <li key={cond}> {cond} </li>
+            {popup.map((cond, i) => (
+              <li
+                key={cond}
+                onClick={() => handleSelected(i)}
+                className={selected === i ? 'active' : ''}
+              >
+                {cond}
+              </li>
             ))}
           </ul>
         </div>
