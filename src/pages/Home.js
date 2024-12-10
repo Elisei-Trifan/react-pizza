@@ -18,8 +18,9 @@ const Home = () => {
         setTimeout(() => {
           setItems(arr)
           setIsLoading(false)
-        }, 500)
+        }, 300)
       })
+    window.scrollTo(0, 0)
   }, [])
 
   return (
