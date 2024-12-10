@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import Categories from '../components/Categories'
@@ -8,9 +9,14 @@ import Sort from '../components/Sort'
 const Home = () => {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
+  const [categoryId, setCategoryId] = React.useState(0)
+  const [sortType, setSortType] = React.useState(0)
 
   React.useEffect(() => {
-    fetch('https://6756ce9ec0a427baf94a792f.mockapi.io/items')
+    setIsLoading(true)
+    fetch(
+      'https://6756ce9ec0a427baf94a792f.mockapi.io/items?category=' + categoryId
+    )
       .then((res) => {
         return res.json()
       })
@@ -21,13 +27,15 @@ const Home = () => {
         }, 300)
       })
     window.scrollTo(0, 0)
-  }, [])
+  }, [categoryId])
 
   return (
     <>
       <div className="content__top">
-        <Categories />
-
+        <Categories
+          value={categoryId}
+          onClickCategory={(i) => setCategoryId(i)}
+        />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
