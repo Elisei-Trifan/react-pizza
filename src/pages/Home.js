@@ -18,7 +18,7 @@ const Home = () => {
         setTimeout(() => {
           setItems(arr)
           setIsLoading(false)
-        }, 1000)
+        }, 500)
       })
   }, [])
 
