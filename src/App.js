@@ -12,10 +12,12 @@ import './scss/app.scss'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('')
+
   return (
     <div className="App">
       <div className="wrapper">
-        <Header />
+        <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <div className="content">
           <div className="container">
             <Routes>
