@@ -6,7 +6,7 @@ import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sceleton from '../components/PizzaBlock/Sceleton'
 import Sort from '../components/Sort'
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [categoryId, setCategoryId] = React.useState(0)
@@ -34,6 +34,13 @@ const Home = () => {
     window.scrollTo(0, 0)
   }, [categoryId, sortType])
 
+  const sceletons = [...new Array(6)].map((_, i) => <Sceleton key={i} />)
+  const arrayPizzas = items
+    .filter((pizza) =>
+      pizza.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+
   return (
     <>
       <div className="content__top">
@@ -46,9 +53,7 @@ const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
 
       <div className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((_, i) => <Sceleton key={i} />)
-          : items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+        {isLoading ? sceletons : arrayPizzas}
       </div>
     </>
   )

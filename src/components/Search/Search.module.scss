@@ -10,19 +10,31 @@
   border-radius: 10px;
   width: 300px;
   font-size: 18px;
-  transition: all 0.2s ease;
 
   &:hover {
     background: rgba(216, 196, 15, 0.2);
-    width: 500px;
   }
 }
 
 .icon {
   position: absolute;
   opacity: 0.4;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   left: 12px;
-  top: 12px;
+  top: 15px;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
