@@ -2,9 +2,13 @@ import React from 'react'
 
 import search from '../../assets/img/search.svg'
 import close from '../../assets/img/close.svg'
+import { searchContext } from '../../App'
+
 import styles from './Search.module.scss'
 
-const Search = ({ searchValue, setSearchValue }) => {
+const Search = () => {
+  const { searchValue, setSearchValue } = React.useContext(searchContext)
+
   function handleChangeInput(e) {
     setSearchValue(e.target.value)
   }
