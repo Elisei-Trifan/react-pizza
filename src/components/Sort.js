@@ -2,7 +2,6 @@ import React from 'react'
 
 const Sort = ({ value, onClickSortType }) => {
   const [isOpen, setIsOpen] = React.useState(false)
-  // const [selected, setSelected] = React.useState(0)
   const popup = [
     { name: 'популярности', sortProperty: 'rating' },
     { name: 'цене', sortProperty: 'price' },
