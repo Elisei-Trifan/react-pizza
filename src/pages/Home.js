@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import axios from 'axios'
 
 import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
@@ -26,17 +27,15 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true)
-    fetch(
-      `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
-        categoryId +
-        `&sortBy=${sortType.sortProperty}&order=asc`
-    )
+    axios
+      .get(
+        `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
+          categoryId +
+          `&sortBy=${sortType.sortProperty}&order=asc`
+      )
       .then((res) => {
-        return res.json()
-      })
-      .then((arr) => {
         setTimeout(() => {
-          setItems(arr)
+          setItems(res.data)
           setIsLoading(false)
         }, 300)
       })
