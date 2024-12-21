@@ -8,25 +8,19 @@ import Sort from '../components/Sort'
 import Pagination from '../components/Pagination/Pagination'
 import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId } from '../redux/slices/filterSlice'
+import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
 
 const Home = () => {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  // const [categoryId, setCategoryId] = React.useState(0)
   const [currentPage, setCurrentPage] = React.useState(1)
-  const [sortType, setSortType] = React.useState({
-    name: 'популярности',
-    sortProperty: 'rating',
-  })
   const { searchValue } = React.useContext(searchContext)
 
   const categoryId = useSelector((state) => state.filter.categoryId)
-
+  const sortType = useSelector((state) => state.filter.sortType)
   const dispatch = useDispatch()
 
   function onChangeCategory(id) {
-    console.log(id)
     dispatch(setCategoryId(id))
   }
 
@@ -60,7 +54,10 @@ const Home = () => {
     <>
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={onChangeCategory} />
-        <Sort value={sortType} onClickSortType={(cond) => setSortType(cond)} />
+        <Sort
+          value={sortType}
+          onClickSortType={(cond) => dispatch(setSortType(cond))}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
 
