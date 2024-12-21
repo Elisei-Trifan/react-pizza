@@ -10,18 +10,11 @@ import Cart from './pages/Cart'
 
 import './scss/app.scss'
 import { Routes, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { increment } from './redux/slices/filterSlice'
 
 export const searchContext = React.createContext()
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('')
-  const filter = useSelector((state) => state.filter.value)
-  const count = useSelector((state) => state.filter.count)
-  const dispatch = useDispatch()
-
-  console.log(filter, count)
 
   return (
     <div className="App">
@@ -39,7 +32,6 @@ function App() {
           </div>
         </searchContext.Provider>
       </div>
-      <button onClick={() => dispatch(increment())}>qeahtrssds</button>
     </div>
   )
 }
