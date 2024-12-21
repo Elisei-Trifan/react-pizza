@@ -9,15 +9,17 @@ import Pagination from '../components/Pagination/Pagination'
 import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
+import { setCurrentPage } from '../redux/slices/paginationSlice'
 
 const Home = () => {
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [currentPage, setCurrentPage] = React.useState(1)
+  // const [currentPage, setCurrentPage] = React.useState(1)
   const { searchValue } = React.useContext(searchContext)
 
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortType = useSelector((state) => state.filter.sortType)
+  const currentPage = useSelector((state) => state.pagination.currentPage)
   const dispatch = useDispatch()
 
   function onChangeCategory(id) {
@@ -64,7 +66,7 @@ const Home = () => {
       <div className="content__items">
         {isLoading ? sceletons : arrayPizzas}
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination onChangePage={(number) => dispatch(setCurrentPage(number))} />
     </>
   )
 }
