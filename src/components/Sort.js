@@ -8,13 +8,23 @@ const Sort = ({ value, onClickSortType }) => {
     { name: 'алфавиту', sortProperty: 'title' },
   ]
 
+  const sortRef = React.useRef()
+
   function handleSelected(cond) {
     onClickSortType(cond)
     setIsOpen(!isOpen)
   }
 
+  React.useEffect(() => {
+    document.body.addEventListener('click', (e) => {
+      if (!e.composedPath().includes(sortRef.current)) {
+        setIsOpen(false)
+      }
+    })
+  }, [])
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
