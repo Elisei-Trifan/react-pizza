@@ -64,7 +64,6 @@ const Home = () => {
         {isLoading ? sceletons : arrayPizzas}
       </div>
       <Pagination />
-      {/* <Pagination onChangePage={(number) => dispatch(setCurrentPage(number))} /> */}
     </>
   )
 }
