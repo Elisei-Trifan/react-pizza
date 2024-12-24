@@ -18,7 +18,6 @@ const Sort = ({ value, onClickSortType }) => {
   React.useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.composedPath().includes(sortRef.current)) {
-        console.log('djbcsk')
         setIsOpen(false)
       }
     }
