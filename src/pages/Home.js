@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import axios from 'axios'
 
 import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
@@ -11,14 +10,13 @@ import Pagination from '../components/Pagination/Pagination'
 import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
-import { setItems } from '../redux/slices/pizzaSlice'
+import { setItems, fetchPizza } from '../redux/slices/pizzaSlice'
 
 const Home = () => {
-  // const [items, setItems] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(true)
+  // const [isLoading, setIsLoading] = React.useState(true)
   const { searchValue } = React.useContext(searchContext)
 
-  const { items } = useSelector((state) => state.pizza)
+  const { items, status } = useSelector((state) => state.pizza)
 
   const { sortType, categoryId } = useSelector((state) => state.filter)
   const currentPage = useSelector((state) => state.pagination.currentPage)
@@ -28,50 +26,23 @@ const Home = () => {
     dispatch(setCategoryId(id))
   }
 
-  const fetchPizzas = async () => {
-    setIsLoading(true)
+  const getPizzas = async () => {
+    // setIsLoading(true)
 
-    try {
-      const res = await axios.get(
-        `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
-          categoryId +
-          `&sortBy=${sortType.sortProperty}&order=asc`
-      )
-
-      setTimeout(() => {
-        dispatch(setItems(res.data))
-        setIsLoading(false)
-      }, 300)
-    } catch (error) {
-      console.log('Error:', error)
-      alert('Ошибка при загрузке данных')
-    } finally {
-      setIsLoading(false)
-    }
+    dispatch(
+      fetchPizza({
+        categoryId,
+        sortType,
+        currentPage,
+      })
+    )
 
     window.scrollTo(0, 0)
   }
 
   React.useEffect(() => {
-    fetchPizzas()
+    getPizzas()
   }, [categoryId, sortType, currentPage])
-
-  // React.useEffect(() => {
-  //   setIsLoading(true)
-  //   axios
-  //     .get(
-  //       `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
-  //         categoryId +
-  //         `&sortBy=${sortType.sortProperty}&order=asc`
-  //     )
-  //     .then((res) => {
-  //       setTimeout(() => {
-  //         setItems(res.data)
-  //         setIsLoading(false)
-  //       }, 300)
-  //     })
-  //   window.scrollTo(0, 0)
-  // }, [categoryId, sortType, currentPage])
 
   const sceletons = [...new Array(6)].map((_, i) => <Sceleton key={i} />)
   const arrayPizzas = items
@@ -92,7 +63,7 @@ const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
 
       <div className="content__items">
-        {isLoading ? sceletons : arrayPizzas}
+        {status === 'loading' ? sceletons : arrayPizzas}
       </div>
       <Pagination />
     </>
