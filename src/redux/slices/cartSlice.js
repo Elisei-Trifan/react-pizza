@@ -36,12 +36,24 @@ const cartSlice = createSlice({
       state.totalPrice -= action.payload.price
     },
 
+    // removeItem(state, action) {
+    //   state.items = state.items.filter((item) => item.id !== action.payload)
+    // },
+
     removeItem(state, action) {
-      state.items = state.items.filter((item) => item.id !== action.payload)
+      const itemToRemove = state.items.find(
+        (item) => item.id === action.payload
+      )
+
+      if (itemToRemove) {
+        state.totalPrice -= itemToRemove.price * itemToRemove.count
+        state.items = state.items.filter((item) => item.id !== action.payload)
+      }
     },
 
     clearItems(state, action) {
       state.items = []
+      state.totalPrice = 0
     },
   },
 })
