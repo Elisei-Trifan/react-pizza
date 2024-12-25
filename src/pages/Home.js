@@ -11,14 +11,16 @@ import Pagination from '../components/Pagination/Pagination'
 import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
+import { setItems } from '../redux/slices/pizzaSlice'
 
 const Home = () => {
-  const [items, setItems] = React.useState([])
+  // const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const { searchValue } = React.useContext(searchContext)
 
-  const categoryId = useSelector((state) => state.filter.categoryId)
-  const sortType = useSelector((state) => state.filter.sortType)
+  const { items } = useSelector((state) => state.pizza)
+
+  const { sortType, categoryId } = useSelector((state) => state.filter)
   const currentPage = useSelector((state) => state.pagination.currentPage)
   const dispatch = useDispatch()
 
@@ -29,19 +31,6 @@ const Home = () => {
   const fetchPizzas = async () => {
     setIsLoading(true)
 
-    // await axios
-    //   .get(
-    //     `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
-    //       categoryId +
-    //       `&sortBy=${sortType.sortProperty}&order=asc`
-    //   )
-    //   .then((res) => {
-    //     setTimeout(() => {
-    //       setItems(res.data)
-    //       setIsLoading(false)
-    //     }, 300)
-    //   })
-
     try {
       const res = await axios.get(
         `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
@@ -50,7 +39,7 @@ const Home = () => {
       )
 
       setTimeout(() => {
-        setItems(res.data)
+        dispatch(setItems(res.data))
         setIsLoading(false)
       }, 300)
     } catch (error) {
@@ -111,3 +100,16 @@ const Home = () => {
 }
 
 export default Home
+
+// await axios
+//   .get(
+//     `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
+//       categoryId +
+//       `&sortBy=${sortType.sortProperty}&order=asc`
+//   )
+//   .then((res) => {
+//     setTimeout(() => {
+//       setItems(res.data)
+//       setIsLoading(false)
+//     }, 300)
+//   })
