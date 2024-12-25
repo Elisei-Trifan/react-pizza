@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import CartItem from '../components/CartItem'
 import { clearItems } from '../redux/slices/cartSlice'
+import CartEmpty from '../components/CartEmpty'
 
 const Cart = () => {
   const { items, totalPrice } = useSelector((state) => state.cart)
@@ -14,6 +15,10 @@ const Cart = () => {
   }
 
   const totalCount = items.reduce((acc, item) => acc + item.count, 0)
+
+  if (!totalPrice) {
+    return <CartEmpty />
+  }
 
   return (
     <div>
@@ -93,9 +98,9 @@ const Cart = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => (
-            <CartItem key={item.id} {...item} />
-          ))}
+          {items.map(
+            (item) => item.count > 0 && <CartItem key={item.id} {...item} />
+          )}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
