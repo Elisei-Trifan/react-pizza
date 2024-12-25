@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
@@ -25,22 +26,63 @@ const Home = () => {
     dispatch(setCategoryId(id))
   }
 
-  React.useEffect(() => {
+  const fetchPizzas = async () => {
     setIsLoading(true)
-    axios
-      .get(
+
+    // await axios
+    //   .get(
+    //     `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
+    //       categoryId +
+    //       `&sortBy=${sortType.sortProperty}&order=asc`
+    //   )
+    //   .then((res) => {
+    //     setTimeout(() => {
+    //       setItems(res.data)
+    //       setIsLoading(false)
+    //     }, 300)
+    //   })
+
+    try {
+      const res = await axios.get(
         `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
           categoryId +
           `&sortBy=${sortType.sortProperty}&order=asc`
       )
-      .then((res) => {
-        setTimeout(() => {
-          setItems(res.data)
-          setIsLoading(false)
-        }, 300)
-      })
+
+      setTimeout(() => {
+        setItems(res.data)
+        setIsLoading(false)
+      }, 300)
+    } catch (error) {
+      console.log('Error:', error)
+      alert('Ошибка при загрузке данных')
+    } finally {
+      setIsLoading(false)
+    }
+
     window.scrollTo(0, 0)
+  }
+
+  React.useEffect(() => {
+    fetchPizzas()
   }, [categoryId, sortType, currentPage])
+
+  // React.useEffect(() => {
+  //   setIsLoading(true)
+  //   axios
+  //     .get(
+  //       `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
+  //         categoryId +
+  //         `&sortBy=${sortType.sortProperty}&order=asc`
+  //     )
+  //     .then((res) => {
+  //       setTimeout(() => {
+  //         setItems(res.data)
+  //         setIsLoading(false)
+  //       }, 300)
+  //     })
+  //   window.scrollTo(0, 0)
+  // }, [categoryId, sortType, currentPage])
 
   const sceletons = [...new Array(6)].map((_, i) => <Sceleton key={i} />)
   const arrayPizzas = items
