@@ -9,16 +9,22 @@ import Sort from '../components/Sort'
 import Pagination from '../components/Pagination/Pagination'
 import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
+import {
+  setCategoryId,
+  setSortType,
+  setSearchValue,
+} from '../redux/slices/filterSlice'
 import { setItems, fetchPizza } from '../redux/slices/pizzaSlice'
 
 const Home = () => {
   // const [isLoading, setIsLoading] = React.useState(true)
-  const { searchValue } = React.useContext(searchContext)
+  // const { searchValue } = React.useContext(searchContext)
 
   const { items, status } = useSelector((state) => state.pizza)
 
-  const { sortType, categoryId } = useSelector((state) => state.filter)
+  const { sortType, categoryId, searchValue } = useSelector(
+    (state) => state.filter
+  )
   const currentPage = useSelector((state) => state.pagination.currentPage)
   const dispatch = useDispatch()
 
