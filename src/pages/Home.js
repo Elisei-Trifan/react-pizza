@@ -7,19 +7,16 @@ import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sceleton from '../components/PizzaBlock/Sceleton'
 import Sort from '../components/Sort'
 import Pagination from '../components/Pagination/Pagination'
-import { searchContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setCategoryId,
   setSortType,
   setSearchValue,
 } from '../redux/slices/filterSlice'
-import { setItems, fetchPizza } from '../redux/slices/pizzaSlice'
+import { fetchPizza } from '../redux/slices/pizzaSlice'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
-  // const [isLoading, setIsLoading] = React.useState(true)
-  // const { searchValue } = React.useContext(searchContext)
-
   const { items, status } = useSelector((state) => state.pizza)
 
   const { sortType, categoryId, searchValue } = useSelector(
@@ -33,8 +30,6 @@ const Home = () => {
   }
 
   const getPizzas = async () => {
-    // setIsLoading(true)
-
     dispatch(
       fetchPizza({
         categoryId,
@@ -77,16 +72,3 @@ const Home = () => {
 }
 
 export default Home
-
-// await axios
-//   .get(
-//     `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
-//       categoryId +
-//       `&sortBy=${sortType.sortProperty}&order=asc`
-//   )
-//   .then((res) => {
-//     setTimeout(() => {
-//       setItems(res.data)
-//       setIsLoading(false)
-//     }, 300)
-//   })
