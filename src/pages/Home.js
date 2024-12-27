@@ -5,7 +5,7 @@ import React from 'react'
 import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sceleton from '../components/PizzaBlock/Sceleton'
-import Sort from '../components/Sort'
+import Sort from '../components/Sort.tsx'
 import Pagination from '../components/Pagination/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import {

@@ -5,10 +5,20 @@ import { Link, useLocation } from 'react-router-dom'
 import Search from './Search/Search'
 import { useSelector } from 'react-redux'
 
-const Header = () => {
-  const { items, totalPrice } = useSelector((state) => state.cart)
-  const totalCount = items.reduce((acc, item) => acc + item.count, 0)
+interface CartItem {
+  items: []
+  totalPrice: number
+  cart: any
+}
+
+const Header: React.FC = () => {
+  const { items, totalPrice } = useSelector((state: CartItem) => state.cart)
   const location = useLocation()
+
+  const totalCount = items.reduce(
+    (acc: number, item: any) => acc + item.count,
+    0
+  )
 
   return (
     <div className="header">

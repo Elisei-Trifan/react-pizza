@@ -1,22 +1,32 @@
 import React from 'react'
 
-const Sort = ({ value, onClickSortType }) => {
+type SortListItem = {
+  name: string
+  sortProperty: string
+}
+
+type SortProps = {
+  value: SortListItem
+  onClickSortType: (cond: SortListItem) => void
+}
+
+const Sort: React.FC<SortProps> = ({ value, onClickSortType }) => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const popup = [
+  const sortList: SortListItem[] = [
     { name: 'популярности', sortProperty: 'rating' },
     { name: 'цене', sortProperty: 'price' },
     { name: 'алфавиту', sortProperty: 'title' },
   ]
 
-  const sortRef = React.useRef()
+  const sortRef = React.useRef<HTMLDivElement>(null)
 
-  function handleSelected(cond) {
+  function handleSelected(cond: SortListItem) {
     onClickSortType(cond)
     setIsOpen(!isOpen)
   }
 
   React.useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (!e.composedPath().includes(sortRef.current)) {
         setIsOpen(false)
       }
@@ -50,7 +60,7 @@ const Sort = ({ value, onClickSortType }) => {
       {isOpen && (
         <div className="sort__popup">
           <ul>
-            {popup.map((cond, i) => (
+            {sortList.map((cond) => (
               <li
                 key={cond.name}
                 onClick={() => handleSelected(cond)}
