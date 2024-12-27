@@ -4,9 +4,13 @@ import React from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
   const { id } = useParams()
-  const [pizza, setPizza] = React.useState()
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string
+    title: string
+    price: string
+  }>()
 
   React.useEffect(() => {
     async function fetchPizza() {
@@ -31,6 +35,7 @@ const FullPizza = () => {
     <div>
       <h1>FullPizza</h1>
       <h2> {pizza.title} </h2>
+      <h2> {pizza.price} рублей </h2>
       <img src={pizza.imageUrl} alt="pizza" />
     </div>
   )
