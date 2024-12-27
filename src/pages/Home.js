@@ -2,19 +2,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 
-import Categories from '../components/Categories'
+import Categories from '../components/Categories.tsx'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import Sceleton from '../components/PizzaBlock/Sceleton'
 import Sort from '../components/Sort.tsx'
 import Pagination from '../components/Pagination/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setCategoryId,
-  setSortType,
-  setSearchValue,
-} from '../redux/slices/filterSlice'
+import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
 import { fetchPizza } from '../redux/slices/pizzaSlice'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
   const { items, status } = useSelector((state) => state.pizza)
