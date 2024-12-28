@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import plusik from '../../assets/img/plusik.svg'
-import { addItem, ICartItem, IRootState } from '../../redux/slices/cartSlice'
+import { addItem, TCartItem } from '../../redux/slices/cartSlice'
+import { TRootState } from '../../redux/store'
 import { Link } from 'react-router-dom'
 
 type PizzaBlockProps = {
@@ -29,8 +30,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
 
   const dispatch = useDispatch()
 
-  const cartItem = useSelector((state: IRootState) =>
-    state.cart.items.find((obj: ICartItem) => obj.id === id)
+  const cartItem = useSelector((state: TRootState) =>
+    state.cart.items.find((obj: TCartItem) => obj.id === id)
   )
 
   const addedCount = cartItem ? cartItem.count : 0

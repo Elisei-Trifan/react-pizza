@@ -7,18 +7,18 @@ import Sceleton from '../components/PizzaBlock/Sceleton.tsx'
 import Sort from '../components/Sort.tsx'
 import Pagination from '../components/Pagination/Pagination.tsx'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId, setSortType } from '../redux/slices/filterSlice.js'
-import { fetchPizza } from '../redux/slices/pizzaSlice.js'
-import { IRootState } from '../redux/store.tsx'
+import { setCategoryId, setSortType } from '../redux/slices/filterSlice.ts'
+import { fetchPizza } from '../redux/slices/pizzaSlice.ts'
+import { TRootState } from '../redux/store.ts'
 
 const Home: React.FC = () => {
-  const { items, status } = useSelector((state: IRootState) => state.pizza)
+  const { items, status } = useSelector((state: TRootState) => state.pizza)
 
   const { sortType, categoryId, searchValue } = useSelector(
-    (state: IRootState) => state.filter
+    (state: TRootState) => state.filter
   )
   const currentPage = useSelector(
-    (state: IRootState) => state.pagination?.currentPage
+    (state: TRootState) => state.pagination?.currentPage
   )
   const dispatch = useDispatch()
 

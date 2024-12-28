@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { ICartItem } from './cartSlice'
+import { TCartItem } from './cartSlice'
 
 export type IPizzaState = {
-  items: ICartItem[]
+  items: TCartItem[]
   status: string
 }
 

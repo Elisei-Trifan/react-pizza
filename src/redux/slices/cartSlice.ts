@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export type ICartItem = {
+export type TCartItem = {
   id: string
   name: string
   count: number
   price: number
 }
 
-export type ICartState = {
-  items: ICartItem[]
+interface ICartSliceState {
+  items: TCartItem[]
   totalPrice: number
 }
 
-const initialState: ICartState = {
+const initialState: ICartSliceState = {
   totalPrice: 0,
   items: [],
 }
