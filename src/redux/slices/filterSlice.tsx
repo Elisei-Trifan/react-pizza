@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+export type IFilterState = {
+  searchValue: string
+  categoryId: number
+  sortType: {
+    name: string
+    sortProperty: string
+  }
+}
+
+const initialState: IFilterState = {
   searchValue: '',
   categoryId: 0,
   sortType: {

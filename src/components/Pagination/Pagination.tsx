@@ -5,7 +5,7 @@ import { setCurrentPage } from '../../redux/slices/paginationSlice'
 
 import styles from './Pagination.module.scss'
 
-const Pagination = () => {
+const Pagination: React.FC = () => {
   const dispatch = useDispatch()
 
   return (

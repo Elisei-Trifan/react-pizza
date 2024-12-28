@@ -1,31 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-
 import Categories from '../components/Categories.tsx'
-import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
-import Sceleton from '../components/PizzaBlock/Sceleton'
+import PizzaBlock from '../components/PizzaBlock/PizzaBlock.tsx'
+import Sceleton from '../components/PizzaBlock/Sceleton.tsx'
 import Sort from '../components/Sort.tsx'
-import Pagination from '../components/Pagination/Pagination'
+import Pagination from '../components/Pagination/Pagination.tsx'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId, setSortType } from '../redux/slices/filterSlice'
-import { fetchPizza } from '../redux/slices/pizzaSlice'
+import { setCategoryId, setSortType } from '../redux/slices/filterSlice.js'
+import { fetchPizza } from '../redux/slices/pizzaSlice.js'
+import { IRootState } from '../redux/store.tsx'
 
-const Home = () => {
-  const { items, status } = useSelector((state) => state.pizza)
+const Home: React.FC = () => {
+  const { items, status } = useSelector((state: IRootState) => state.pizza)
 
   const { sortType, categoryId, searchValue } = useSelector(
-    (state) => state.filter
+    (state: IRootState) => state.filter
   )
-  const currentPage = useSelector((state) => state.pagination.currentPage)
+  const currentPage = useSelector(
+    (state: IRootState) => state.pagination?.currentPage
+  )
   const dispatch = useDispatch()
 
-  function onChangeCategory(id) {
+  function onChangeCategory(id: number) {
     dispatch(setCategoryId(id))
   }
 
   const getPizzas = async () => {
     dispatch(
+      // @ts-ignore
       fetchPizza({
         categoryId,
         sortType,
@@ -42,10 +45,10 @@ const Home = () => {
 
   const sceletons = [...new Array(6)].map((_, i) => <Sceleton key={i} />)
   const arrayPizzas = items
-    .filter((pizza) =>
+    .filter((pizza: any) =>
       pizza.title.toLowerCase().includes(searchValue.toLowerCase())
     )
-    .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+    .map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)
 
   return (
     <>

@@ -1,11 +1,27 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import plusik from '../../assets/img/plusik.svg'
-
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem, ICartItem, IRootState } from '../../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+type PizzaBlockProps = {
+  id: string
+  title: string
+  types: number[]
+  price: number
+  sizes: number[]
+  imageUrl: string
+  count: number
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const [activeType, setActiveType] = React.useState(0)
   const [activeSize, setActiveSize] = React.useState(0)
 
@@ -13,8 +29,8 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
 
   const dispatch = useDispatch()
 
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id)
+  const cartItem = useSelector((state: IRootState) =>
+    state.cart.items.find((obj: ICartItem) => obj.id === id)
   )
 
   const addedCount = cartItem ? cartItem.count : 0

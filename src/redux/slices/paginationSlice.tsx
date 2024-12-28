@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+export type IPaginationState = {
+  currentPage: number
+}
+
+const initialState: IPaginationState = {
   currentPage: 1,
 }
 

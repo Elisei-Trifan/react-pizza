@@ -1,10 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { ICartItem } from './cartSlice'
+
+export type IPizzaState = {
+  items: ICartItem[]
+  status: string
+}
 
 export const fetchPizza = createAsyncThunk(
   'pizza/fetchPizzaStatus',
-  async (params, thunkAPI) => {
+  async (params) => {
+    // @ts-ignore
     const { categoryId, sortType, currentPage } = params
     const res = await axios.get(
       `https://6756ce9ec0a427baf94a792f.mockapi.io/items?page=${currentPage}&limit=3&category=` +
@@ -16,7 +23,7 @@ export const fetchPizza = createAsyncThunk(
   }
 )
 
-const initialState = {
+const initialState: IPizzaState = {
   items: [],
   status: '',
 }
