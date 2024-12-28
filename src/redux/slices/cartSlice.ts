@@ -1,10 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type TCartItem = {
   id: string
-  name: string
   count: number
   price: number
+  size: number
+  type: string
+  imageUrl: string
+  title: string
+}
+
+type TMinusItem = {
+  id: string
+  price: number
+}
+
+type TAddItem = {
+  id: string
+  price: number
+  count?: number
 }
 
 interface ICartSliceState {
@@ -36,7 +50,7 @@ const cartSlice = createSlice({
       state.totalPrice += action.payload.price
     },
 
-    minusItem(state, action) {
+    minusItem(state, action: PayloadAction<TMinusItem>) {
       const findItem = state.items.find((obj) => obj.id === action.payload.id)
 
       if (findItem) {
@@ -45,7 +59,7 @@ const cartSlice = createSlice({
       state.totalPrice -= action.payload.price
     },
 
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<string>) {
       const itemToRemove = state.items.find(
         (item) => item.id === action.payload
       )

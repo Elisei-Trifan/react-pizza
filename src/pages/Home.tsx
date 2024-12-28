@@ -6,10 +6,10 @@ import PizzaBlock from '../components/PizzaBlock/PizzaBlock.tsx'
 import Sceleton from '../components/PizzaBlock/Sceleton.tsx'
 import Sort from '../components/Sort.tsx'
 import Pagination from '../components/Pagination/Pagination.tsx'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { setCategoryId, setSortType } from '../redux/slices/filterSlice.ts'
 import { fetchPizza } from '../redux/slices/pizzaSlice.ts'
-import { TRootState } from '../redux/store.ts'
+import { useAppDispatch, TRootState } from '../redux/store.ts'
 
 const Home: React.FC = () => {
   const { items, status } = useSelector((state: TRootState) => state.pizza)
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   const currentPage = useSelector(
     (state: TRootState) => state.pagination?.currentPage
   )
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   function onChangeCategory(id: number) {
     dispatch(setCategoryId(id))
@@ -28,7 +28,6 @@ const Home: React.FC = () => {
 
   const getPizzas = async () => {
     dispatch(
-      // @ts-ignore
       fetchPizza({
         categoryId,
         sortType,
