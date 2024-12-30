@@ -15,11 +15,11 @@ type TMinusItem = {
   price: number
 }
 
-type TAddItem = {
-  id: string
-  price: number
-  count?: number
-}
+// type TAddItem = {
+//   id: string
+//   price: number
+//   count?: number
+// }
 
 interface ICartSliceState {
   items: TCartItem[]
