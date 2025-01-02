@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getCartFromLocalStorage } from '../../utils/getCartFromLocalStorage'
+import { calcTotalPrice } from '../../utils/calcTotalPrice'
 
 export type TCartItem = {
   id: string
@@ -27,9 +28,11 @@ interface ICartSliceState {
   totalPrice: number
 }
 
+const { items, totalPrice } = getCartFromLocalStorage()
+
 const initialState: ICartSliceState = {
-  totalPrice: 0,
-  items: getCartFromLocalStorage(),
+  totalPrice,
+  items,
 }
 
 const cartSlice = createSlice({
@@ -48,7 +51,8 @@ const cartSlice = createSlice({
         })
       }
 
-      state.totalPrice += action.payload.price
+      // state.totalPrice += action.payload.price
+      state.totalPrice = calcTotalPrice(state.items)
     },
 
     minusItem(state, action: PayloadAction<TMinusItem>) {
