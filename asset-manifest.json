@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Elisei-Trifan.github.io/react-pizza/static/css/main.fa4af307.css",
+    "main.js": "/Elisei-Trifan.github.io/react-pizza/static/js/main.220e4a7b.js",
+    "static/js/333.e9718e7a.chunk.js": "/Elisei-Trifan.github.io/react-pizza/static/js/333.e9718e7a.chunk.js",
+    "static/js/130.0adf89e1.chunk.js": "/Elisei-Trifan.github.io/react-pizza/static/js/130.0adf89e1.chunk.js",
+    "static/css/976.948054a9.chunk.css": "/Elisei-Trifan.github.io/react-pizza/static/css/976.948054a9.chunk.css",
+    "static/js/976.2e2138ed.chunk.js": "/Elisei-Trifan.github.io/react-pizza/static/js/976.2e2138ed.chunk.js",
+    "static/media/empty-cart.png": "/Elisei-Trifan.github.io/react-pizza/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "static/media/pizza-logo.svg": "/Elisei-Trifan.github.io/react-pizza/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
+    "index.html": "/Elisei-Trifan.github.io/react-pizza/index.html",
+    "static/media/search.svg": "/Elisei-Trifan.github.io/react-pizza/static/media/search.76df147b415197cedb09652bffc2d683.svg",
+    "static/media/close.svg": "/Elisei-Trifan.github.io/react-pizza/static/media/close.d462f5d387c26e86c93e179a8450490c.svg",
+    "static/media/plusik.svg": "/Elisei-Trifan.github.io/react-pizza/static/media/plusik.55d35068d0b169421685d8ad9df6a5d5.svg",
+    "main.fa4af307.css.map": "/Elisei-Trifan.github.io/react-pizza/static/css/main.fa4af307.css.map",
+    "main.220e4a7b.js.map": "/Elisei-Trifan.github.io/react-pizza/static/js/main.220e4a7b.js.map",
+    "333.e9718e7a.chunk.js.map": "/Elisei-Trifan.github.io/react-pizza/static/js/333.e9718e7a.chunk.js.map",
+    "130.0adf89e1.chunk.js.map": "/Elisei-Trifan.github.io/react-pizza/static/js/130.0adf89e1.chunk.js.map",
+    "976.948054a9.chunk.css.map": "/Elisei-Trifan.github.io/react-pizza/static/css/976.948054a9.chunk.css.map",
+    "976.2e2138ed.chunk.js.map": "/Elisei-Trifan.github.io/react-pizza/static/js/976.2e2138ed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa4af307.css",
+    "static/js/main.220e4a7b.js"
+  ]
+}
